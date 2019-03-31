@@ -1,8 +1,8 @@
-import React from 'react';
-import Head from 'next/head';
-import styled from 'styled-components';
-import * as Amp from 'react-amphtml';
-import * as AmpHelpers from 'react-amphtml/helpers';
+import React from "react";
+import Head from "next/head";
+import styled from "styled-components";
+import * as Amp from "react-amphtml";
+import * as AmpHelpers from "react-amphtml/helpers";
 
 const Container = styled.div`
   max-width: 70rem;
@@ -11,22 +11,22 @@ const Container = styled.div`
 `;
 
 const StyledAmpImg = styled(Amp.AmpImg)`
-  filter: ${(props) => {
-    switch (props['data-filter']) {
+  filter: ${props => {
+    switch (props["data-filter"]) {
       case 1:
-        return 'blur(10px)';
+        return "blur(10px)";
       case 2:
-        return 'hue-rotate(180deg)';
+        return "hue-rotate(180deg)";
       case 3:
-        return 'invert(100%)';
+        return "invert(100%)";
       case 4:
-        return 'grayscale(100%)';
+        return "grayscale(100%)";
       case 5:
-        return 'sepia(100%)';
+        return "sepia(100%)";
       case 6:
-        return 'saturate(100%)';
+        return "saturate(100%)";
       default:
-        return 'none';
+        return "none";
     }
   }};
 `;
@@ -37,7 +37,7 @@ const RelativeAmpList = styled(Amp.AmpList)`
 `;
 
 const defaultHeading = {
-  text: 'Hello, World!',
+  text: "Hello, World!",
 };
 
 export default () => (
@@ -55,13 +55,15 @@ export default () => (
 
     <p>
       <label htmlFor="headingInputElement">
-        <p><b>Type your heading:</b></p>
+        <p>
+          <b>Type your heading:</b>
+        </p>
         <Amp.AmpState specName="amp-state" id="headingInput">
           {defaultHeading}
         </Amp.AmpState>
         <AmpHelpers.Action
           events={{
-            change: ['AMP.setState({ headingInput: { text: event.value } })'],
+            change: ["AMP.setState({ headingInput: { text: event.value } })"],
           }}
         >
           {props => <input {...props} type="text" id="headingInputElement" />}
@@ -69,7 +71,7 @@ export default () => (
       </label>
       <AmpHelpers.Action
         events={{
-          tap: ['AMP.setState({ heading: { text: headingInput.text } })'],
+          tap: ["AMP.setState({ heading: { text: headingInput.text } })"],
         }}
       >
         {props => <button {...props}>Set Heading</button>}
@@ -79,7 +81,7 @@ export default () => (
     <p>
       <AmpHelpers.Action
         events={{
-          tap: ['awesome-carousel.toggleVisibility'],
+          tap: ["awesome-carousel.toggleVisibility"],
         }}
       >
         {props => <button {...props}>Toggle Carousel Visibility</button>}
@@ -95,7 +97,7 @@ export default () => (
       {[...Array(6)].map((v, index) => (
         <StyledAmpImg
           specName="default"
-          key={Buffer.from(Math.random().toString()).toString('base64')}
+          key={Buffer.from(Math.random().toString()).toString("base64")}
           data-filter={index}
           src="/static/amp.jpg"
           width="1080"
@@ -108,9 +110,7 @@ export default () => (
     <h1>Hacker News</h1>
     <RelativeAmpList
       specName="default"
-      src={(
-        `https://www.graphqlhub.com/graphql?query=${
-          encodeURIComponent(`
+      src={`https://www.graphqlhub.com/graphql?query=${encodeURIComponent(`
             {
               hn {
                 topStories {
@@ -121,9 +121,7 @@ export default () => (
                 }
               }
             }
-          `)
-        }`
-      )}
+          `)}`}
       items="data.hn.topStories"
       layout="fill"
     >
@@ -134,7 +132,7 @@ export default () => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            {'{{title}} ⭐ {{score}} 💬 {{descendants}}'}
+            {"{{title}} ⭐ {{score}} 💬 {{descendants}}"}
           </a>
         </div>
       </Amp.Template>
